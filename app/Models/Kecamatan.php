@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Kecamatan extends Model
 {
     use HasFactory;
+    protected $table = 'kecamatans';
+    protected $fillable = ['nama_kecamatan'];
+
+    public function desas()
+    {
+        return $this->hasMany(Desa::class);
+    }
 }

@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\PengugutanSuara;
+use App\Models\Desa;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class PengugutanSuaraPolicy
+class DesaPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +19,7 @@ class PengugutanSuaraPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, PengugutanSuara $pengugutanSuara): bool
+    public function view(User $user, Desa $desa): bool
     {
         //
     }
@@ -35,7 +35,7 @@ class PengugutanSuaraPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, PengugutanSuara $pengugutanSuara): bool
+    public function update(User $user, Desa $desa): bool
     {
         //
     }
@@ -43,7 +43,7 @@ class PengugutanSuaraPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, PengugutanSuara $pengugutanSuara): bool
+    public function delete(User $user, Desa $desa): bool
     {
         //
     }
@@ -51,7 +51,7 @@ class PengugutanSuaraPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, PengugutanSuara $pengugutanSuara): bool
+    public function restore(User $user, Desa $desa): bool
     {
         //
     }
@@ -59,7 +59,7 @@ class PengugutanSuaraPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, PengugutanSuara $pengugutanSuara): bool
+    public function forceDelete(User $user, Desa $desa): bool
     {
         //
     }

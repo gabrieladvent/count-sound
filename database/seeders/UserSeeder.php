@@ -14,27 +14,9 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = [
-            [
-                'id' => 1,
-                'name' => 'Caleg 1'
-            ],
-            [
-                'id' => 2,
-                'name' => 'Caleg 2'
-            ],
-            [
-                'id' => 3,
-                'name' => 'Caleg 3'
-            ],
-            [
-                'id' => 4,
-                'name' => 'Caleg 4'
-            ],
-        ];
-
-        foreach ($user as $users) {
-            User::create($users);
-        }
+        User::create(['name' => 'Caleg 1']);
+        User::create(['name' => 'Caleg 2']);
+        User::create(['name' => 'Caleg 3']);
+        User::create(['name' => 'Caleg 4']);
     }
 }

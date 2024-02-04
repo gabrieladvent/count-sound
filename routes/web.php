@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/input-suara', function (){
-    return view('input');
-})->name("input");
+Route::get('input-suara/caleg/tps', [DashboardController::class, 'input_view'])->name("input");

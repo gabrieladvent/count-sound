@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Caleg>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\TPS>
  */
-class CalegFactory extends Factory
+class TPSFactory extends Factory
 {
     /**
      * Define the model's default state.

@@ -13,7 +13,7 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <span>Caleg Name</span>
+                                            <span>{{ $user[0]->name }}</span>
                                             <div class="stat-text"><i class="fa-solid fa-volume-high me-2 fs-3"></i><span
                                                     class="count fw-bold fs-2">23569</span></div>
                                             <div class="stat-heading fw-bold">Suara</div>
@@ -33,7 +33,7 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <span>Caleg Name</span>
+                                            <span>{{ $user[1]->name }}</span>
                                             <div class="stat-text"><i class="fa-solid fa-volume-high me-2 fs-3"></i><span
                                                     class="count fw-bold fs-2">23569</span></div>
                                             <div class="stat-heading fw-bold">Suara</div>
@@ -53,7 +53,7 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <span>Caleg Name</span>
+                                            <span>{{ $user[2]->name }}</span>
                                             <div class="stat-text"><i class="fa-solid fa-volume-high me-2 fs-3"></i><span
                                                     class="count fw-bold fs-2">23569</span></div>
                                             <div class="stat-heading fw-bold">Suara</div>
@@ -73,7 +73,7 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <span>Caleg Name</span>
+                                            <span>{{ $user[3]->name }}</span>
                                             <div class="stat-text"><i class="fa-solid fa-volume-high me-2 fs-3"></i><span
                                                     class="count fw-bold fs-2">23569</span></div>
                                             <div class="stat-heading fw-bold">Suara</div>
