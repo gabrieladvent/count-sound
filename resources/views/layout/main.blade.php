@@ -65,6 +65,16 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('refreshLink').addEventListener('click', function(event) {
+                event.preventDefault(); // Mencegah tautan melakukan navigasi ke "#" yang sama
+                location.reload(); // Memuat ulang halaman
+            });
+        });
+    </script>
+    
 </body>
 
 </html>
