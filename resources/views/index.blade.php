@@ -95,7 +95,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="card-content">
-                                    <canvas id="doughnutChart" width="400" height="437"></canvas>
+                                    <canvas id="doughnutChart" width="400" height="425"></canvas>
                                 </div>
                             </div>
                         </div>

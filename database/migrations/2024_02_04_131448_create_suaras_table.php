@@ -11,13 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('suaras', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique()->nullable();
-            $table->string('password')->nullable();
-            $table->rememberToken()->nullable();
+            $table->integer('jumlah_suara_tps');
             $table->timestamps();
+
+            $table->foreignId('caleg_id')
+                ->constrained('users')
+                ->onDelete('cascade');
+
+            $table->foreignId('tps_id')
+                ->constrained('pengugutan')
+                ->onDelete('cascade');
         });
     }
 
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('suaras');
     }
 };
