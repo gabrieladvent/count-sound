@@ -18,6 +18,6 @@ class Desa extends Model
 
     public function tps()
     {
-        return $this->hasMany(Tps::class);
+        return $this->hasMany(TPS::class, 'id_desa');
     }
 }

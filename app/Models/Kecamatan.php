@@ -11,8 +11,8 @@ class Kecamatan extends Model
     protected $table = 'kecamatans';
     protected $fillable = ['nama_kecamatan'];
 
-    public function desas()
+    public function desa()
     {
-        return $this->hasMany(Desa::class);
+        return $this->hasMany(Desa::class, 'id_kecamatan');
     }
 }
