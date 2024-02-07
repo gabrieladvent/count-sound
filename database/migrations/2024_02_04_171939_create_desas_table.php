@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nama_desa');
             $table->foreignId('id_kecamatan')->constrained('kecamatans')->onDelete('cascade');
             $table->integer('jumlah_tps');
+            $table->integer('total_suara')->nullable();
             $table->timestamps();
         });
     }

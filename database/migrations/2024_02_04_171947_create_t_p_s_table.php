@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('t_p_s', function (Blueprint $table) {
             $table->id();
             $table->integer('nomor_tps');
-            $table->integer('total_suara')->nullable();
             $table->foreignId('id_desa')->constrained('desas')->onDelete('cascade');
             $table->timestamps();
         });

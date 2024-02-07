@@ -9,7 +9,7 @@ class TPS extends Model
 {
     use HasFactory;
     protected $tabel = 't_p_s';
-    protected $fillable = ['nomor_tps', 'total_suara', 'id_desa'];
+    protected $fillable = ['nomor_tps', 'id_desa'];
 
     public function desa()
     {

@@ -9,7 +9,7 @@ class Suara extends Model
 {
     use HasFactory;
     protected $table = 'suaras';
-    protected $fillable = ['jumlah_suara', 'id_tps', 'id_user'];
+    protected $fillable = ['jumlah_suara', 'id_tps', 'id_desa', 'id_user'];
 
     public function tps()
     {

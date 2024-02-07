@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('jumlah_suara');
             $table->foreignId('id_tps')->constrained('t_p_s')->onDelete('cascade');
+            $table->foreignId('id_desa')->constrained('desas')->onDelete('cascade');
             $table->foreignId('id_user')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
