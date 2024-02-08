@@ -149,42 +149,94 @@ class DashboardController extends Controller
         }
     }
 
+    // public function output_suara()
+    // {
+    //     $user = User::all();
+    //     $suara = Suara::all();
+
+    //     // $userSatu = 0;
+    //     // $userDua = 0;
+    //     // $userTiga = 0;
+    //     // $userEmpat = 0;
+
+    //     $desas = Desa::where('id_kecamatan', 1)->pluck('id');
+
+    //     // Query untuk menghitung jumlah suara tiap user di setiap desa
+    //     $jumlahSuaraPerUser = Suara::whereIn('id_desa', $desas)
+    //         ->select('id_user', DB::raw('SUM(jumlah_suara) as total_suara'))
+    //         ->groupBy('id_user')
+    //         ->get();
+
+    //     return $jumlahSuaraPerUser;
+
+
+    // Iterasi melalui data suara untuk menghitung jumlah suara tiap user
+    // foreach ($suara as $dataSuara) {
+    //     $userId = $dataSuara->id_user;
+    //     $jumlahSuara = $dataSuara->jumlah_suara;
+
+    //     // Menyimpan jumlah suara ke variabel yang sesuai berdasarkan ID pengguna
+    //     switch ($userId) {
+    //         case 1:
+    //             $userSatu += $jumlahSuara;
+    //             break;
+    //         case 2:
+    //             $userDua += $jumlahSuara;
+    //             break;
+    //         case 3:
+    //             $userTiga += $jumlahSuara;
+    //             break;
+    //         case 4:
+    //             $userEmpat += $jumlahSuara;
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // }
+
+
+
+    // return view('hasil-suara', compact('user', 'userSatu', 'userDua', 'userTiga', 'userEmpat'));
+    // }
+
     public function output_suara()
     {
-        $user = User::all();
-        $suara = Suara::all();
+        // Ambil semua user
+        $users = User::all();
 
-        $userSatu = 0;
-        $userDua = 0;
-        $userTiga = 0;
-        $userEmpat = 0;
+        // Ambil semua kecamatan
+        $kecamatans = Kecamatan::all();
 
-        // Iterasi melalui data suara untuk menghitung jumlah suara tiap user
-        foreach ($suara as $dataSuara) {
-            $userId = $dataSuara->id_user;
-            $jumlahSuara = $dataSuara->jumlah_suara;
+        // Inisialisasi array untuk menyimpan hasil suara per user untuk setiap kecamatan
+        $hasilSuaraPerKecamatan = [];
 
-            // Menyimpan jumlah suara ke variabel yang sesuai berdasarkan ID pengguna
-            switch ($userId) {
-                case 1:
-                    $userSatu += $jumlahSuara;
-                    break;
-                case 2:
-                    $userDua += $jumlahSuara;
-                    break;
-                case 3:
-                    $userTiga += $jumlahSuara;
-                    break;
-                case 4:
-                    $userEmpat += $jumlahSuara;
-                    break;
-                default:
-                    break;
+        // Iterasi melalui setiap kecamatan
+        foreach ($kecamatans as $kecamatan) {
+            // Ambil semua desa di kecamatan saat ini
+            $desas = Desa::where('id_kecamatan', $kecamatan->id)->pluck('id');
+
+            // Array untuk menyimpan hasil suara per user untuk kecamatan saat ini
+            $hasilSuaraPerUser = [];
+
+            // Iterasi melalui setiap user
+            foreach ($users as $user) {
+                // Query untuk menghitung jumlah suara user di desa-desanya di kecamatan saat ini
+                $jumlahSuaraPerUser = Suara::whereIn('id_desa', $desas)
+                    ->where('id_user', $user->id)
+                    ->sum('jumlah_suara');
+
+                // Simpan hasil suara per user ke dalam array
+                $hasilSuaraPerUser[$user->id] = $jumlahSuaraPerUser;
             }
+
+            // Simpan array hasil suara per user untuk kecamatan saat ini ke dalam array hasil suara per kecamatan
+            $hasilSuaraPerKecamatan[$kecamatan->nama] = $hasilSuaraPerUser;
         }
 
-        return view('hasil-suara', compact('user', 'userSatu', 'userDua', 'userTiga', 'userEmpat'));
+        return $hasilSuaraPerKecamatan;
     }
+
+
 
     private function updateJumlahSuaraDesaForUser($userId)
     {
@@ -206,7 +258,5 @@ class DashboardController extends Controller
                 $desa->update(['jumlah_suara' => $totalSuara]);
             }
         }
-
-        // Tindakan setelah memperbarui jumlah suara di semua desa untuk pengguna tertentu, jika diperlukan
     }
 }
