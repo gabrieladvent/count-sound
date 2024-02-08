@@ -51,7 +51,7 @@
                                         <div class="text-left dib">
                                             <span>{{ $user[1]->name }}</span>
                                             <div class="stat-text"><i class="fa-solid fa-volume-high me-2 fs-3"></i><span
-                                                    class="count fw-bold fs-2">2</span></div>
+                                                    class="count fw-bold fs-2">{{ $userDua }}</span></div>
                                             <div class="stat-heading fw-bold">Suara</div>
                                         </div>
                                     </div>
@@ -71,7 +71,7 @@
                                         <div class="text-left dib">
                                             <span>{{ $user[2]->name }}</span>
                                             <div class="stat-text"><i class="fa-solid fa-volume-high me-2 fs-3"></i><span
-                                                    class="count fw-bold fs-2">2</span></div>
+                                                    class="count fw-bold fs-2">{{ $userTiga }}</span></div>
                                             <div class="stat-heading fw-bold">Suara</div>
                                         </div>
                                     </div>
@@ -91,7 +91,7 @@
                                         <div class="text-left dib">
                                             <span>{{ $user[3]->name }}</span>
                                             <div class="stat-text"><i class="fa-solid fa-volume-high me-2 fs-3"></i><span
-                                                    class="count fw-bold fs-2">2</span></div>
+                                                    class="count fw-bold fs-2">{{ $userEmpat }}</span></div>
                                             <div class="stat-heading fw-bold">Suara</div>
                                         </div>
                                     </div>
@@ -130,9 +130,8 @@
                                                             <td>
                                                                 <input type="hidden" name="id_desa[]"
                                                                     value="{{ $desa->id }}">
-                                                                <input type="number"
-                                                                    name="tps{{ $i }}_{{ $desa->nama_desa }}"
-                                                                    style="width:75%;"
+                                                                <input type="number" name="tps{{ $i . '_' . $desa->id }}"
+                                                                    style="width:100%;"
                                                                     placeholder="tps {{ $i }}">
                                                             </td>
                                                         @endfor
@@ -147,7 +146,6 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-
                                     </form>
                                 </div>
                             </div>
@@ -159,8 +157,8 @@
                                     <form action="{{ route('input-suara') }}" method="POST">
                                         @csrf
                                         <span class="fs-6 text-secondary">{{ $kecamatans[1]->nama_kecamatan }}</span>
-                                        <input type="hidden" value="{{ $user[0]->id }}">
-                                        <input type="hidden" value="{{ $kecamatans[1]->id }}">
+                                        <input type="hidden" name="id_user" value="{{ $user[0]->id }}">
+                                        <input type="hidden" name="id_kecamatan" value="{{ $kecamatans[1]->id }}">
                                         <table cellpadding="2">
                                             <thead>
                                                 <th>Desa</th>
@@ -178,7 +176,7 @@
                                                                 <input type="hidden" name="id_desa[]"
                                                                     value="{{ $desa->id }}">
                                                                 <input type="number"
-                                                                    name="tps{{ $i . $desa->nama_desa }}"
+                                                                    name="tps{{ $i . '_' . $desa->id }}"
                                                                     style="width:100%;"
                                                                     placeholder="tps {{ $i }}">
                                                             </td>
@@ -205,8 +203,8 @@
                                     <form action="{{ route('input-suara') }}" method="POST">
                                         @csrf
                                         <span class="fs-6 text-secondary">{{ $kecamatans[2]->nama_kecamatan }}</span>
-                                        <input type="hidden" value="{{ $user[0]->id }}">
-                                        <input type="hidden" value="{{ $kecamatans[2]->id }}">
+                                        <input type="hidden" name="id_user" value="{{ $user[0]->id }}">
+                                        <input type="hidden" name="id_kecamatan" value="{{ $kecamatans[2]->id }}">
                                         <table cellpadding="2">
                                             <thead>
                                                 <th>Desa</th>
@@ -224,7 +222,7 @@
                                                                 <input type="hidden" name="id_desa[]"
                                                                     value="{{ $desa->id }}">
                                                                 <input type="number"
-                                                                    name="tps{{ $i . $desa->nama_desa }}"
+                                                                    name="tps{{ $i . '_' . $desa->id }}"
                                                                     style="width:100%;"
                                                                     placeholder="tps {{ $i }}">
                                                             </td>
@@ -254,8 +252,8 @@
                                     <form action="{{ route('input-suara') }}" method="POST">
                                         @csrf
                                         <span class="fs-6 text-secondary">{{ $kecamatans[0]->nama_kecamatan }}</span>
-                                        <input type="hidden" value="{{ $user[1]->id }}">
-                                        <input type="hidden" value="{{ $kecamatans[0]->id }}">
+                                        <input type="hidden" name="id_user" value="{{ $user[1]->id }}">
+                                        <input type="hidden" name="id_kecamatan" value="{{ $kecamatans[0]->id }}">
                                         <table cellpadding="">
                                             <thead>
                                                 <th>Desa</th>
@@ -273,8 +271,8 @@
                                                                 <input type="hidden" name="id_desa[]"
                                                                     value="{{ $desa->id }}">
                                                                 <input type="number"
-                                                                    name="tps{{ $i . $desa->nama_desa }}"
-                                                                    style="width:75%;"
+                                                                    name="tps{{ $i . '_' . $desa->id }}"
+                                                                    style="width:100%;"
                                                                     placeholder="tps {{ $i }}">
                                                             </td>
                                                         @endfor
@@ -300,8 +298,8 @@
                                     <form action="{{ route('input-suara') }}" method="POST">
                                         @csrf
                                         <span class="fs-6 text-secondary">{{ $kecamatans[1]->nama_kecamatan }}</span>
-                                        <input type="hidden" value="{{ $user[1]->id }}">
-                                        <input type="hidden" value="{{ $kecamatans[1]->id }}">
+                                        <input type="hidden" name="id_user" value="{{ $user[1]->id }}">
+                                        <input type="hidden" name="id_kecamatan" value="{{ $kecamatans[1]->id }}">
                                         <table cellpadding="2">
                                             <thead>
                                                 <th>Desa</th>
@@ -319,7 +317,7 @@
                                                                 <input type="hidden" name="id_desa[]"
                                                                     value="{{ $desa->id }}">
                                                                 <input type="number"
-                                                                    name="tps{{ $i . $desa->nama_desa }}"
+                                                                    name="tps{{ $i . '_' . $desa->id }}"
                                                                     style="width:100%;"
                                                                     placeholder="tps {{ $i }}">
                                                             </td>
@@ -346,8 +344,8 @@
                                     <form action="{{ route('input-suara') }}" method="POST">
                                         @csrf
                                         <span class="fs-6 text-secondary">{{ $kecamatans[2]->nama_kecamatan }}</span>
-                                        <input type="hidden" value="{{ $user[1]->id }}">
-                                        <input type="hidden" value="{{ $kecamatans[2]->id }}">
+                                        <input type="hidden" name="id_user" value="{{ $user[1]->id }}">
+                                        <input type="hidden" name="id_kecamatan" value="{{ $kecamatans[2]->id }}">
                                         <table cellpadding="2">
                                             <thead>
                                                 <th>Desa</th>
@@ -365,7 +363,7 @@
                                                                 <input type="hidden" name="id_desa[]"
                                                                     value="{{ $desa->id }}">
                                                                 <input type="number"
-                                                                    name="tps{{ $i . $desa->nama_desa }}"
+                                                                    name="tps{{ $i . '_' . $desa->id }}"
                                                                     style="width:100%;"
                                                                     placeholder="tps {{ $i }}">
                                                             </td>
@@ -389,10 +387,289 @@
                 </div>
 
 
-                {{-- <div class="row ms-1">
-                    
-                    
-                </div> --}}
+                <div class="row ms-1 mb-3">
+                    <div class="col me-3 py-3" style="border-radius: 15px; background-color: #efb2b2">
+                        <div class="row">
+                            <div class="col mb-3">
+                                <span class="fs-4 fw-bold text-dark">{{ $user[2]->name }}</span> <br>
+                                <div class="tabel-content mt-2">
+                                    <form action="{{ route('input-suara') }}" method="POST">
+                                        @csrf
+                                        <span class="fs-6 text-secondary">{{ $kecamatans[0]->nama_kecamatan }}</span>
+                                        <input type="hidden" name="id_user" value="{{ $user[2]->id }}">
+                                        <input type="hidden" name="id_kecamatan" value="{{ $kecamatans[0]->id }}">
+                                        <table cellpadding="">
+                                            <thead>
+                                                <th>Desa</th>
+                                                <th></th>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($kecamatans[0]->desa as $desa)
+                                                    <tr>
+                                                        <td>{{ $desa->nama_desa }}</td>
+                                                        @php
+                                                            $temp = $desa->jumlah_tps;
+                                                        @endphp
+                                                        @for ($i = 1; $i <= $temp; $i++)
+                                                            <td>
+                                                                <input type="hidden" name="id_desa[]"
+                                                                    value="{{ $desa->id }}">
+                                                                <input type="number"
+                                                                    name="tps{{ $i . '_' . $desa->id }}"
+                                                                    style="width:100%;"
+                                                                    placeholder="tps {{ $i }}">
+                                                            </td>
+                                                        @endfor
+                                                    </tr>
+                                                @endforeach
+                                                <tr>
+                                                    <td colspan="6" class="text-center">
+                                                        <button type="submit" class="btn btn-success py-2 mt-2">
+                                                            Submit
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-3">
+                                <div class="tabel-content mt-2">
+                                    <form action="{{ route('input-suara') }}" method="POST">
+                                        @csrf
+                                        <span class="fs-6 text-secondary">{{ $kecamatans[1]->nama_kecamatan }}</span>
+                                        <input type="hidden" name="id_user" value="{{ $user[2]->id }}">
+                                        <input type="hidden" name="id_kecamatan" value="{{ $kecamatans[1]->id }}">
+                                        <table cellpadding="2">
+                                            <thead>
+                                                <th>Desa</th>
+                                                <th></th>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($kecamatans[1]->desa as $desa)
+                                                    <tr>
+                                                        <td>{{ $desa->nama_desa }}</td>
+                                                        @php
+                                                            $temp = $desa->jumlah_tps;
+                                                        @endphp
+                                                        @for ($i = 1; $i <= $temp; $i++)
+                                                            <td>
+                                                                <input type="hidden" name="id_desa[]"
+                                                                    value="{{ $desa->id }}">
+                                                                <input type="number"
+                                                                    name="tps{{ $i . '_' . $desa->id }}"
+                                                                    style="width:100%;"
+                                                                    placeholder="tps {{ $i }}">
+                                                            </td>
+                                                        @endfor
+                                                    </tr>
+                                                @endforeach
+                                                <tr>
+                                                    <td colspan="6" class="text-center">
+                                                        <button type="submit" class="btn btn-success py-2 mt-2">
+                                                            Submit
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="tabel-content mt-2">
+                                    <form action="{{ route('input-suara') }}" method="POST">
+                                        @csrf
+                                        <span class="fs-6 text-secondary">{{ $kecamatans[2]->nama_kecamatan }}</span>
+                                        <input type="hidden" name="id_user" value="{{ $user[2]->id }}">
+                                        <input type="hidden" name="id_kecamatan" value="{{ $kecamatans[2]->id }}">
+                                        <table cellpadding="2">
+                                            <thead>
+                                                <th>Desa</th>
+                                                <th></th>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($kecamatans[2]->desa as $desa)
+                                                    <tr>
+                                                        <td>{{ $desa->nama_desa }}</td>
+                                                        @php
+                                                            $temp = $desa->jumlah_tps;
+                                                        @endphp
+                                                        @for ($i = 1; $i <= $temp; $i++)
+                                                            <td>
+                                                                <input type="hidden" name="id_desa[]"
+                                                                    value="{{ $desa->id }}">
+                                                                <input type="number"
+                                                                    name="tps{{ $i . '_' . $desa->id }}"
+                                                                    style="width:100%;"
+                                                                    placeholder="tps {{ $i }}">
+                                                            </td>
+                                                        @endfor
+                                                    </tr>
+                                                @endforeach
+                                                <tr>
+                                                    <td colspan="6" class="text-center">
+                                                        <button type="submit" class="btn btn-success py-2 mt-2">
+                                                            Submit
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col me-3 py-3" style="border-radius: 15px; background-color: #efb2b2">
+                        <div class="row">
+                            <div class="col mb-3">
+                                <span class="fs-4 fw-bold text-dark">{{ $user[3]->name }}</span> <br>
+                                <div class="tabel-content mt-2">
+                                    <form action="{{ route('input-suara') }}" method="POST">
+                                        @csrf
+                                        <span class="fs-6 text-secondary">{{ $kecamatans[0]->nama_kecamatan }}</span>
+                                        <input type="hidden" name="id_user" value="{{ $user[3]->id }}">
+                                        <input type="hidden" name="id_kecamatan" value="{{ $kecamatans[0]->id }}">
+                                        <table cellpadding="">
+                                            <thead>
+                                                <th>Desa</th>
+                                                <th></th>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($kecamatans[0]->desa as $desa)
+                                                    <tr>
+                                                        <td>{{ $desa->nama_desa }}</td>
+                                                        @php
+                                                            $temp = $desa->jumlah_tps;
+                                                        @endphp
+                                                        @for ($i = 1; $i <= $temp; $i++)
+                                                            <td>
+                                                                <input type="hidden" name="id_desa[]"
+                                                                    value="{{ $desa->id }}">
+                                                                <input type="number"
+                                                                    name="tps{{ $i . '_' . $desa->id }}"
+                                                                    style="width:100%;"
+                                                                    placeholder="tps {{ $i }}">
+                                                            </td>
+                                                        @endfor
+                                                    </tr>
+                                                @endforeach
+                                                <tr>
+                                                    <td colspan="6" class="text-center">
+                                                        <button type="submit" class="btn btn-success py-2 mt-2">
+                                                            Submit
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-3">
+                                <div class="tabel-content mt-2">
+                                    <form action="{{ route('input-suara') }}" method="POST">
+                                        @csrf
+                                        <span class="fs-6 text-secondary">{{ $kecamatans[1]->nama_kecamatan }}</span>
+                                        <input type="hidden" name="id_user" value="{{ $user[3]->id }}">
+                                        <input type="hidden" name="id_kecamatan" value="{{ $kecamatans[1]->id }}">
+                                        <table cellpadding="2">
+                                            <thead>
+                                                <th>Desa</th>
+                                                <th></th>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($kecamatans[1]->desa as $desa)
+                                                    <tr>
+                                                        <td>{{ $desa->nama_desa }}</td>
+                                                        @php
+                                                            $temp = $desa->jumlah_tps;
+                                                        @endphp
+                                                        @for ($i = 1; $i <= $temp; $i++)
+                                                            <td>
+                                                                <input type="hidden" name="id_desa[]"
+                                                                    value="{{ $desa->id }}">
+                                                                <input type="number"
+                                                                    name="tps{{ $i . '_' . $desa->id }}"
+                                                                    style="width:100%;"
+                                                                    placeholder="tps {{ $i }}">
+                                                            </td>
+                                                        @endfor
+                                                    </tr>
+                                                @endforeach
+                                                <tr>
+                                                    <td colspan="6" class="text-center">
+                                                        <button type="submit" class="btn btn-success py-2 mt-2">
+                                                            Submit
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="tabel-content mt-2">
+                                    <form action="{{ route('input-suara') }}" method="POST">
+                                        @csrf
+                                        <span class="fs-6 text-secondary">{{ $kecamatans[2]->nama_kecamatan }}</span>
+                                        <input type="hidden" name="id_user" value="{{ $user[3]->id }}">
+                                        <input type="hidden" name="id_kecamatan" value="{{ $kecamatans[2]->id }}">
+                                        <table cellpadding="2">
+                                            <thead>
+                                                <th>Desa</th>
+                                                <th></th>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($kecamatans[2]->desa as $desa)
+                                                    <tr>
+                                                        <td>{{ $desa->nama_desa }}</td>
+                                                        @php
+                                                            $temp = $desa->jumlah_tps;
+                                                        @endphp
+                                                        @for ($i = 1; $i <= $temp; $i++)
+                                                            <td>
+                                                                <input type="hidden" name="id_desa[]"
+                                                                    value="{{ $desa->id }}">
+                                                                <input type="number"
+                                                                    name="tps{{ $i . '_' . $desa->id }}"
+                                                                    style="width:100%;"
+                                                                    placeholder="tps {{ $i }}">
+                                                            </td>
+                                                        @endfor
+                                                    </tr>
+                                                @endforeach
+                                                <tr>
+                                                    <td colspan="6" class="text-center">
+                                                        <button type="submit" class="btn btn-success py-2 mt-2">
+                                                            Submit
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

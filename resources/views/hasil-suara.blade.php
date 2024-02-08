@@ -1,8 +1,24 @@
 @extends('layout.main')
 @section('isi-content')
+    <style>
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
     <div id="right-panel" class="right-panel">
         <div class="content">
             <div class="animated fadeIn">
+                @if (session()->has('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('error') }}
+                    </div>
+                @elseif (session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                    </div>
+                @endif
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
                         <div class="card" style="background-color: #efb2b2; border-radius: 25px;">
@@ -85,70 +101,26 @@
                     </div>
                 </div>
 
+                <p class="fs-2 fw-bold mb-3 text-dark">HASIL PERHITUNGAN SUARA</p>
 
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="card" style="background-color: #efb2b2; border-radius: 25px;">
-                            <div class="card-body">
-                                <h4 class="box-title ms-3 fw-bold fs-2 text-dark">Perhitungan Suara*</h4>
-                                <p class="ms-3">*Tiap Caleg</p>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-content">
-                                    <canvas id="doughnutChart" width="400" height="425"></canvas>
-                                </div>
-                            </div>
-                        </div>
+                <div class="card" style="background-color: #efb2b2; border-radius: 25px;">
+                    <div class="card-body">
+                        <h4 class="box-title ms-3 fw-bold fs-2 text-dark">Perhitungan Suara*</h4>
+                        <p class="ms-3">*Tiap TPS</p>
                     </div>
-
-                    <div class="col-lg-8">
-                        <div class="card" style="background-color: #efb2b2; border-radius: 25px;">
-                            <div class="card-body">
-                                <h4 class="box-title ms-3 fw-bold fs-2 text-dark">Perhitungan Suara*</h4>
-                                <p class="ms-3">*Tiap TPS</p>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-content">
-                                    <canvas id="barChart"></canvas>
-                                </div>
-                            </div>
+                    <div class="card-body">
+                        <div class="card-content">
+                            <canvas id="barChart"></canvas>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 
-
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            var dgc = document.getElementById("doughnutChart").getContext("2d");
-            dgc.height = 150;
-            var myChart = new Chart(dgc, {
-                type: "doughnut",
-                data: {
-                    datasets: [{
-                        data: [1905, 1997, 1412, 1308],
-                        backgroundColor: [
-                            "rgb(0, 194, 146)", // Merah
-                            "rgb(171, 140, 228)", // Kuning
-                            "rgb(3, 169, 243)", // Hijau
-                            "rgb(247, 118, 247)"
-                        ],
-                        hoverBackgroundColor: [
-                            "rgba(0, 194, 146, 0.3)", // Merah
-                            "rgba(171, 140, 228, 0.3)", // Kuning
-                            "rgba(3, 169, 243, 0.3)", // Hijau
-                            "rgba(247, 118, 247, 0.3)" // Hijau
-                        ],
-                    }, ],
-                    labels: ["Caleg 1", "Caleg 2", "Caleg 3", "Caleg 4"],
-                },
-                options: {
-                    responsive: true,
-                },
-            });
-
             var ctx = document.getElementById("barChart");
             var myChart = new Chart(ctx, {
                 type: 'bar',

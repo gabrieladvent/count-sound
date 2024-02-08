@@ -15,7 +15,37 @@ class DashboardController extends Controller
     public function index()
     {
         $user = User::all();
-        return view('dashboard', compact('user'));
+        $suara = Suara::all();
+
+        $userSatu = 0;
+        $userDua = 0;
+        $userTiga = 0;
+        $userEmpat = 0;
+
+        // Iterasi melalui data suara untuk menghitung jumlah suara tiap user
+        foreach ($suara as $dataSuara) {
+            $userId = $dataSuara->id_user;
+            $jumlahSuara = $dataSuara->jumlah_suara;
+
+            // Menyimpan jumlah suara ke variabel yang sesuai berdasarkan ID pengguna
+            switch ($userId) {
+                case 1:
+                    $userSatu += $jumlahSuara;
+                    break;
+                case 2:
+                    $userDua += $jumlahSuara;
+                    break;
+                case 3:
+                    $userTiga += $jumlahSuara;
+                    break;
+                case 4:
+                    $userEmpat += $jumlahSuara;
+                    break;
+                default:
+                    break;
+            }
+        }
+        return view('dashboard', compact('user', 'userSatu', 'userDua', 'userTiga', 'userEmpat'));
     }
 
     public function input_view()
@@ -72,22 +102,25 @@ class DashboardController extends Controller
         $id_user = $request->id_user;
         $id_kecamatan = $request->id_kecamatan;
 
-        // ambil inputan tps
+        // dd($request->all());
+
+        // Ambil inputan tps
         DB::beginTransaction();
         try {
             foreach ($request->all() as $key => $value) {
                 if (strpos($key, 'tps') === 0) {
                     $parts = explode('_', $key);
-                    $tps_number = preg_replace('/[^0-9]/', '', $key);
-                    $desa_name = $parts[1];
+                    $tps_number = $parts[0]; // Ambil nomor TPS dari array pertama
+                    $tps_number = preg_replace('/[^0-9]/', '', $tps_number);
+                    $id_desa = $parts[1]; // Ambil ID desa dari array kedua
 
-                    // Dapatkan ID desa berdasarkan nama desa
-                    $desa = Desa::where('nama_desa', $desa_name)->first();
+                    // Dapatkan ID desa berdasarkan ID yang ditemukan
+                    $desa = Desa::find($id_desa);
                     if ($desa) {
                         Suara::create([
                             'jumlah_suara' => $value,
                             'id_tps' => $tps_number,
-                            'id_desa' => $desa->id,
+                            'id_desa' => $id_desa,
                             'id_user' => $id_user,
                         ]);
                     } else {
@@ -97,12 +130,11 @@ class DashboardController extends Controller
                 }
             }
 
-            // hitung jumlah suara untuk tiap desa
+            // Hitung jumlah suara untuk tiap desa
             $desas = Desa::all();
             foreach ($desas as $desa) {
                 $suaraDesa = Suara::where('id_desa', $desa->id)->get();
                 $totalSuara = 0;
-
                 foreach ($suaraDesa as $suara) {
                     $totalSuara += $suara->jumlah_suara;
                 }
@@ -113,11 +145,46 @@ class DashboardController extends Controller
             return redirect()->back()->with('success', 'Data berhasil disimpan');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Terjadi kesalahan');
+            return redirect()->back()->with('error', 'Terjadi kesalahan' . $e);
         }
-        // $this->updateJumlahSuaraDesaForUser(1);
     }
 
+    public function output_suara()
+    {
+        $user = User::all();
+        $suara = Suara::all();
+
+        $userSatu = 0;
+        $userDua = 0;
+        $userTiga = 0;
+        $userEmpat = 0;
+
+        // Iterasi melalui data suara untuk menghitung jumlah suara tiap user
+        foreach ($suara as $dataSuara) {
+            $userId = $dataSuara->id_user;
+            $jumlahSuara = $dataSuara->jumlah_suara;
+
+            // Menyimpan jumlah suara ke variabel yang sesuai berdasarkan ID pengguna
+            switch ($userId) {
+                case 1:
+                    $userSatu += $jumlahSuara;
+                    break;
+                case 2:
+                    $userDua += $jumlahSuara;
+                    break;
+                case 3:
+                    $userTiga += $jumlahSuara;
+                    break;
+                case 4:
+                    $userEmpat += $jumlahSuara;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return view('hasil-suara', compact('user', 'userSatu', 'userDua', 'userTiga', 'userEmpat'));
+    }
 
     private function updateJumlahSuaraDesaForUser($userId)
     {

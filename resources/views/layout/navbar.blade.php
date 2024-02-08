@@ -15,6 +15,9 @@
                     <a class="nav-link active" aria-disabled="true" href="{{ route('input') }}">Input</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link active" aria-disabled="true" href="{{ route('hasil') }}">Hasil</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#" id="refreshLink"><i
                             class="fa fa-refresh"></i></a>
                 </li>
