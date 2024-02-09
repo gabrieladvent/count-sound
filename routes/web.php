@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CheckDevice;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 
@@ -14,9 +15,13 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+Route::group([
+    'middleware' => CheckDevice::class
+], function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('input-suara/caleg/tps', [DashboardController::class, 'input_view'])->name("input");
-Route::post('proses-jumlah-tps', [DashboardController::class, 'proses_tps'])->name('take-tps');
-Route::post('input-suara/proses', [DashboardController::class, 'proses_input'])->name('input-suara');
-Route::get('hasil-suara/caleg', [DashboardController::class, 'output_suara'])->name('hasil');
+    Route::get('input-suara/caleg/tps', [DashboardController::class, 'input_view'])->name("input");
+    Route::post('proses-jumlah-tps', [DashboardController::class, 'proses_tps'])->name('take-tps');
+    Route::post('input-suara/proses', [DashboardController::class, 'proses_input'])->name('input-suara');
+    Route::get('hasil-suara/caleg', [DashboardController::class, 'output_suara'])->name('hasil');
+});

@@ -9,7 +9,7 @@ class Kecamatan extends Model
 {
     use HasFactory;
     protected $table = 'kecamatans';
-    protected $fillable = ['nama_kecamatan'];
+    protected $fillable = ['nama_kecamatan', 'jumlah_desa'];
 
     public function desa()
     {
