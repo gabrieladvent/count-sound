@@ -554,7 +554,7 @@
                                     <div class="col">
                                         <h5 class="mb-3 ms-2">Jumlah Suara Terbanyak</h5>
                                         <i class="fa-solid fa-crown fa-xl"></i>
-                                        <span class="fs-1 fw-bold text-dark me-2 mt-4">{{ $pemenang }}</span>
+                                        <span class="fs-3 fw-bold text-dark me-2 mt-4">{{ $pemenang }}</span>
                                         <span class="fw-bold">{{ $nilaiPemenang }}</span>
                                     </div>
 
@@ -562,7 +562,7 @@
                                         <div class="sorting">
                                             @foreach ($nilai as $key => $value)
                                                 <span class="fs-4 me-2 mb-2">{{ $key }}</span>
-                                                <span class="fw-bold">{{ $value }}</span> <br>
+                                                <span class="">{{ $value }}</span> <br>
                                             @endforeach
                                         </div>
                                     </div>

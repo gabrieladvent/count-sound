@@ -14,9 +14,9 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create(['name' => 'Caleg 1']);
-        User::create(['name' => 'Caleg 2']);
-        User::create(['name' => 'Caleg 3']);
-        User::create(['name' => 'Caleg 4']);
+        User::create(['name' => 'Martinus Welan']);
+        User::create(['name' => 'Susmiati']);
+        User::create(['name' => 'Simon Ruron']);
+        User::create(['name' => 'Kristina']);
     }
 }

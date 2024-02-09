@@ -5,12 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Perhitungan Suara</title>
-
-    <link href="assets/images/img/sound.png" rel="icon">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/images/favicon_io/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/favicon_io/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon_io/favicon-32x32.png') }}">
+    <link rel="manifest" href="/site.webmanifest">
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
-
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -28,7 +29,22 @@
 
     <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
-    
+
+    <style>
+        #btn-back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+        }
+
+        #btn-back-to-bottom {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -37,6 +53,14 @@
     <div>
         @yield('isi-content')
     </div>
+
+    <button type="button" class="btn btn-danger btn-floating btn-lg rounded-circle" id="btn-back-to-top">
+        <i class="fa-solid fa-hand-point-up"></i>
+    </button>
+
+    <button type="button" class="btn btn-info btn-floating btn-lg rounded-circle" id="btn-back-to-bottom">
+        <i class="fa-solid fa-hand-point-down"></i>
+    </button>
 
     @include('layout.footer')
 
@@ -74,7 +98,7 @@
     <script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
 
-    
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -83,6 +107,48 @@
                 location.reload(); // Memuat ulang halaman
             });
         });
+
+        let mybutton = document.getElementById("btn-back-to-top");
+        let mybuttontwo = document.getElementById('btn-back-to-bottom');
+
+        document.addEventListener('scroll', scrollFunction);
+
+        function scrollFunction() {
+            if (isAtBottom()) {
+                mybutton.style.display = "block";
+                mybuttontwo.style.display = "none";
+            } else if (isAtTop()) {
+                mybutton.style.display = "none";
+                mybuttontwo.style.display = "block";
+            } else {
+                mybutton.style.display = "block";
+                mybuttontwo.style.display = "block";
+            }
+        }
+
+        function isAtBottom() {
+            return (window.innerHeight + window.scrollY) >= document.body.offsetHeight;
+        }
+
+        function isAtTop() {
+            return window.scrollY === 0;
+        }
+
+        mybutton.addEventListener("click", backToTop);
+
+        function backToTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+
+        mybuttontwo.addEventListener("click", backToBottom);
+
+        function backToBottom() {
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
     </script>
 
 </body>

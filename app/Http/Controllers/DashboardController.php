@@ -58,6 +58,8 @@ class DashboardController extends Controller
         $userDua = 0;
         $userTiga = 0;
         $userEmpat = 0;
+        $id_users = [];
+        $id_desas = [];
 
         // Iterasi melalui data suara untuk menghitung jumlah suara tiap user
         foreach ($suara as $dataSuara) {
@@ -81,14 +83,20 @@ class DashboardController extends Controller
                 default:
                     break;
             }
+
+            // Memeriksa jika id_user dan id_desa sudah ada sebelumnya
+            if (!in_array($dataSuara->id_user, $id_users)) {
+                $id_users[] = $dataSuara->id_user;
+            }
+            if (!in_array($dataSuara->id_desa, $id_desas)) {
+                $id_desas[] = $dataSuara->id_desa;
+            }
         }
 
-        // dd($userTiga);
+        $sudah = Desa::whereIn('id', $id_desas)->pluck('id_kecamatan')->unique();
 
-        // Kirimkan data ke view
-        return view('input-other', compact('kecamatans', 'user', 'userSatu', 'userDua', 'userTiga', 'userEmpat'));
+        return view('input-other', compact('kecamatans', 'user', 'userSatu', 'userDua', 'userTiga', 'userEmpat', 'sudah'));
     }
-
 
     public function proses_tps(Request $request)
     {
@@ -102,9 +110,6 @@ class DashboardController extends Controller
         $id_user = $request->id_user;
         $id_kecamatan = $request->id_kecamatan;
 
-        // dd($request->all());
-
-        // Ambil inputan tps
         DB::beginTransaction();
         try {
             foreach ($request->all() as $key => $value) {
@@ -145,7 +150,7 @@ class DashboardController extends Controller
             return redirect()->back()->with('success', 'Data berhasil disimpan');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Terjadi kesalahan' . $e);
+            return redirect()->back()->with('error', 'Terjadi kesalahan');
         }
     }
 
@@ -207,39 +212,16 @@ class DashboardController extends Controller
             $hasilSuaraPerUser[$user->id] = $jumlahSuara;
         }
 
-
         $nilai = [
-            'Caleg 1' => $userSatu,
-            'Caleg 2' => $userDua,
-            'Caleg 3' => $userTiga,
-            'Caleg 4' => $userEmpat
+            'Martinus Welan' => $userSatu,
+            'Susmiati' => $userDua,
+            'Simon Ruron' => $userTiga,
+            'Kristina' => $userEmpat
         ];
-        asort($nilai);
+        arsort($nilai);
         $pemenang = key($nilai);
         $nilaiPemenang = current($nilai);
 
         return view('hasil-suara', compact('users', 'userSatu', 'userDua', 'userTiga', 'userEmpat', 'hasilSuaraPerKecamatan', 'kecamatans', 'tps', 'suara', 'hasilSuaraPerUser', 'nilai', 'pemenang', 'nilaiPemenang'));
-    }
-
-    private function updateJumlahSuaraDesaForUser($userId)
-    {
-        // Ambil semua suara untuk pengguna dengan ID yang ditentukan
-        $suaraUser = Suara::where('id_user', $userId)->get();
-
-        // Inisialisasi array untuk menyimpan total jumlah suara per desa
-        $totalSuaraPerDesa = [];
-
-        // Jumlahkan jumlah suara dari setiap TPS dan kelompokkan berdasarkan ID desa
-        foreach ($suaraUser as $suara) {
-            $totalSuaraPerDesa[$suara->id_desa] = isset($totalSuaraPerDesa[$suara->id_desa]) ? $totalSuaraPerDesa[$suara->id_desa] + $suara->jumlah_suara : $suara->jumlah_suara;
-        }
-
-        // Update jumlah_suara di tabel desa berdasarkan hasil penghitungan
-        foreach ($totalSuaraPerDesa as $idDesa => $totalSuara) {
-            $desa = Desa::find($idDesa);
-            if ($desa) {
-                $desa->update(['jumlah_suara' => $totalSuara]);
-            }
-        }
     }
 }

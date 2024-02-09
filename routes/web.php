@@ -19,7 +19,6 @@ Route::group([
     'middleware' => CheckDevice::class
 ], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-
     Route::get('input-suara/caleg/tps', [DashboardController::class, 'input_view'])->name("input");
     Route::post('proses-jumlah-tps', [DashboardController::class, 'proses_tps'])->name('take-tps');
     Route::post('input-suara/proses', [DashboardController::class, 'proses_input'])->name('input-suara');
