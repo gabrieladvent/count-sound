@@ -1,5 +1,11 @@
 @extends('layout.main')
 @section('isi-content')
+<style>
+    .announcement{
+        background-color: #ded97b;
+        border-radius: 25px;
+    }
+</style>
     <div id="right-panel" class="right-panel">
         <div class="content">
             <div class="animated fadeIn">
@@ -83,6 +89,13 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="announcement p-3">
+                    <span class="fs-3 fw-bold"><i class="fa-regular fa-lightbulb fa-xl me-2"></i>INFORMASI !!</span>  
+                    <p class="mt-2 ms-4 text-dark">
+                        Berikut adalah situs web yang dibuat untuk membantu perhitungan suara sehingga lebih praktis. Namun, disarankan agar selain dicatat dalam sistem, suara yang diterima juga dicatat secara manual. Hal ini dilakukan untuk menutup kemungkinan adanya kesalahan dari sistem. Terima kasih atas perhatiannya! Salam demokrasi!
+                    </p>
                 </div>
             </div>
         </div>
