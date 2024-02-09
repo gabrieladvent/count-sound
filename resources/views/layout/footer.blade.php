@@ -1,7 +1,7 @@
 <footer class="site-footer">
     <div class="footer-inner bg-white">
             <div class="text-center">
-                Designed by <span class="fw-bold">G. Adv. B</span>  v.0.0.2
+                Designed by <span class="fw-bold">G. Adv. B</span>  v.0.0.4
             </div>
             <div class="text-center">
                 Contact me:
