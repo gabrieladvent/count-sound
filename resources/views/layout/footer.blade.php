@@ -7,9 +7,9 @@
                 Contact me:
             </div>
             <div class="medsos text-center">
-                <a href="#" class="me-3"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#" class="me-3"><i class="fa-solid fa-mobile-screen-button"></i></a>
-                <a href="https://github.com/gabrieladvent"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.instagram.com/gab_adv?igsh=MTYwbWRxMGJlcGw1NQ==" class="me-3" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://api.whatsapp.com/send/?phone=6281284115265&text&type=phone_number&app_absent=0" class="me-3" target="_blank"><i class="fa-solid fa-mobile-screen-button"></i></a>
+                <a href="https://github.com/gabrieladvent" target="_blank"><i class="fa-brands fa-github"></i></a>
             </div>
     </div>
 </footer>
